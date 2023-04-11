@@ -1,18 +1,15 @@
+# This controller manages CRUD operations for the `Article` model.
 class ArticlesController < ApplicationController
   before_action :load_article, only: %i[show edit update destroy]
 
   def index
     @articles = Article.all.paginate(page: params[:page] || 1, per_page: 10)
-    respond_to do |format|
-      format.html
-    end
+    respond_to :html
   end
 
   def new
     @article = Article.new
-    respond_to do |format|
-      format.html
-    end
+    respond_to :html
   end
 
   def create
@@ -28,15 +25,11 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    respond_to do |format|
-      format.html
-    end
+    respond_to :html
   end
 
   def edit
-    respond_to do |format|
-      format.html
-    end
+    respond_to :html
   end
 
   def update
