@@ -1,18 +1,20 @@
- class ArticlesController < ApplicationController
+class ArticlesController < ApplicationController
   before_action :load_article, only: %i[show edit update destroy]
 
   def index
     @articles = Article.all.paginate(page: params[:page] || 1, per_page: 10)
     respond_to do |format|
-        format.html
+      format.html
     end
   end
+
   def new
     @article = Article.new
     respond_to do |format|
-        format.html
+      format.html
     end
   end
+
   def create
     @article = Article.new(article_params)
     if @article.save
@@ -21,12 +23,13 @@
       # redirect_to article_path(@article)
     else
       render :new
-      #render 'new'
+      # render 'new'
     end
   end
+
   def show
     respond_to do |format|
-        format.html
+      format.html
     end
   end
 
@@ -42,7 +45,7 @@
       redirect_to @article
     else
       render :edit
-      #render 'edit'
+      # render 'edit'
     end
   end
 
@@ -52,7 +55,7 @@
   end
 
   private
-  
+
   def article_params
     params.require(:article).permit(:title, :description)
   end
@@ -60,5 +63,4 @@
   def load_article
     @article = Article.find_by(id: params[:id])
   end
-  
- end
+end
